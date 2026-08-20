@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>T.C. Yen Dashboard</title>
+
+<style>
+
+:root{
+
+--primary:#0078D4;
+--bg:#f4f7fb;
+--card:#ffffff;
+--text:#222222;
+--shadow:0 5px 15px rgba(0,0,0,0.10);
+
+}
+
+.dark{
+
+--bg:#121212;
+--card:#1e1e1e;
+--text:#f0f0f0;
+
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:"Segoe UI","Microsoft JhengHei",sans-serif;
+background:var(--bg);
+color:var(--text);
+
+transition:.3s;
+
+}
+
+header{
+
+padding:30px;
+text-align:center;
+
+}
+
+h1{
+
+font-size:2.5rem;
+margin-bottom:10px;
+
+}
+
+#clock{
+
+font-size:1.1rem;
+opacity:0.8;
+
+}
+
+.search{
+
+width:80%;
+max-width:700px;
+margin:20px auto;
+
+}
+
+.search input{
+
+width:100%;
+padding:16px;
+
+font-size:1rem;
+
+border:none;
+border-radius:12px;
+
+box-shadow:var(--shadow);
+
+}
+
+.container{
+
+width:92%;
+margin:auto;
+
+}
+
+.grid{
+
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
+
+gap:20px;
+
+}
+
+.card{
+
+background:var(--card);
+
+padding:20px;
+
+border-radius:18px;
+
+box-shadow:var(--shadow);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.card h2{
+
+margin-bottom:15px;
+
+color:var(--primary);
+
+}
+
+.card a{
+
+display:block;
+
+padding:10px;
+
+text-decoration:none;
+
+color:var(--text);
+
+border-radius:8px;
+
+}
+
+.card a:hover{
+
+background:#e8f1ff;
+
+}
+
+.dark .card a:hover{
+
+background:#333333;
+
+}
+
+button{
+
+padding:10px 15px;
+
+border:none;
+
+border-radius:10px;
+
+background:var(--primary);
+
+color:white;
+
+cursor:pointer;
+
+}
+
+.top-btn{
+
+position:fixed;
+
+top:20px;
+right:20px;
+
+}
+
+.todo{
+
+margin-top:10px;
+
+}
+
+.todo input{
+
+width:70%;
+padding:10px;
+
+}
+
+.todo ul{
+
+margin-top:10px;
+
+padding-left:20px;
+
+}
+
+footer{
+
+text-align:center;
+
+padding:30px;
+
+opacity:0.6;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<button
+class="top-btn"
+onclick="toggleDarkMode()">
+
+🌙 深色模式
+
+</button>
+
+<header>
+
+<h1>📚 T.C. Yen Dashboard</h1>
+
+<div id="clock"></div>
+
+<div class="search">
+
+<input
+type="text"
+placeholder="Google 搜尋..."
+onkeypress="googleSearch(event)">
+
+</div>
+
+</header>
+
+<div class="container">
+
+<div class="grid">
+
+<!-- AI -->
+
+<div class="card">
+
+<h2>🤖 AI 工具</h2>
+
+<a href="https://chatgpt.com">
+ChatGPT
+</a>
+
+<a href="https://m365.cloud.microsoft/chat?omkt=zh-TW">
+Microsoft Copilot
+</a>
+
+<a href="https://gemini.google.com">
+Gemini
+</a>
+
+</div>
+
+<!-- 學術 -->
+
+<div class="card">
+
+<h2>📖 學術研究</h2>
+
+<a href="https://scholar.google.com">
+Google Scholar
+</a>
+
+<a href="https://www.scopus.com">
+Scopus
+</a>
+
+<a href="https://www.webofscience.com">
+Web of Science
+</a>
+
+<a href="https://or.stackexchange.com">
+Operations Research
+</a>
+</div>
+
+<!-- Python -->
+
+<div class="card">
+
+<h2>🐍 Python / SymPy</h2>
+
+<a href="https://docs.sympy.org">
+SymPy Documentation
+</a>
+
+<a href="https://colab.research.google.com">
+Google Colab
+</a>
+
+<a href="https://jupyter.org">
+Jupyter
+</a>
+
+<a href="https://github.com">
+GitHub
+</a>
+
+</div>
+
+<!-- 論文 -->
+
+<div class="card">
+
+<h2>📝 論文寫作</h2>
+
+<a href="https://www.overleaf.com">
+Overleaf
+</a>
+
+<a href="https://www.zotero.org">
+Zotero
+</a>
+
+<a href="https://www.grammarly.com">
+Grammarly
+</a>
+
+<a href="https://office.com">
+Microsoft 365
+</a>
+
+</div>
+
+<!-- 雲端 -->
+
+<div class="card">
+
+<h2>☁️ 雲端硬碟</h2>
+
+<a href="https://drive.google.com">
+Google Drive
+</a>
+
+<a href="http://140.120.8.169">
+NAS
+</a>
+
+</div>
+
+<!-- 研討會 -->
+
+<div class="card">
+
+<h2>🎓 Conference</h2>
+
+<a href="https://ifors.org">
+IFORS
+</a>
+
+<a href="https://www.informs.org">
+INFORMS
+</a>
+
+<a href="https://www.euro-online.org">
+EURO
+</a>
+
+</div>
+
+<!-- 旅遊 -->
+
+<div class="card">
+
+<h2>✈️ Travel</h2>
+
+<a href="https://www.google.com/travel">
+Google Travel
+</a>
+
+<a href="https://maps.google.com">
+Google Maps
+</a>
+
+<a href="https://www.booking.com">
+Booking
+</a>
+
+<a href="https://www.agoda.com">
+Agoda
+</a>
+
+</div>
+
+<!-- 工作 -->
+
+<div class="card">
+
+<h2>📅 工作平台</h2>
+
+<a href="https://calendar.google.com">
+Google Calendar
+</a>
+
+</div>
+
+<!-- ToDo -->
+
+<div class="card">
+
+<h2>✅ 今日待辦</h2>
+
+<div class="todo">
+
+<input id="taskInput"
+placeholder="新增事項">
+
+<button onclick="addTask()">
+
+新增
+
+</button>
+
+<ul id="taskList"></ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+Academic AI Dashboard Version 1.0
+
+</footer>
+
+<script>
+
+function updateClock(){
+
+let now = new Date();
+
+document.getElementById("clock").innerHTML=
+
+now.toLocaleString("zh-TW");
+
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+function googleSearch(e){
+
+if(e.key==="Enter"){
+
+let q=e.target.value;
+
+window.open(
+
+"https://www.google.com/search?q="
++ encodeURIComponent(q)
+
+);
+
+}
+
+}
+
+function toggleDarkMode(){
+
+document.body.classList.toggle('dark');
+
+}
+
+function addTask(){
+
+let input=document.getElementById("taskInput");
+
+if(input.value==="") return;
+
+let li=document.createElement("li");
+
+li.innerText=input.value;
+
+document.getElementById("taskList")
+
+.appendChild(li);
+
+input.value="";
+
+}
+
+</script>
+
+</body>
+
+</html>
